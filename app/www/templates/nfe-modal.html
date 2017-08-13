@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar class="custom-bar-header">
+    <h1 class="title">NFe Paulista</h1>
+  </ion-header-bar>
+  <ion-content class="coo-form">
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">CNPJ</span>
+        <input type="text" ng-model="document.cnpj" ui-br-cnpj-mask="">
+      </label>
+      <label class="item item-input" ng-click="pickDate()">
+        <span class="input-label">Data</span>
+        <input type="text" ng-model="document.formattedDate" readonly="readonly">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">COO</span>
+        <input type="text" maxlength="6" ng-model="document.coo">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Valor</span>
+        <input type="text" ng-model="document.value" ui-money-mask="2">
+      </label>
+      <div class="padding">
+        <button class="button button-block" ng-click="saveNfe(document)">Confirmar</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

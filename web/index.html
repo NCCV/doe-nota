@@ -1,0 +1,93 @@
+<html  lang="pt-br">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>NCCV | Back-office</title>
+
+    <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" media="screen"/>
+    <link href="/lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" media="screen"/>
+    <link href="/lib/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet" media="screen"/>
+    <link href="/css/application.css" rel="stylesheet" media="screen"/>
+
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700" rel="stylesheet" type="text/css" media="screen" />
+  </head>
+  <body ng-cloak="" ng-controller="app.Controller as avm">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">NCCV | Back-office</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+          <li class="hidden-lg" ui-sref-active="active">
+            <a ui-sref="dashboard">Painel</a>
+          </li>
+          <li class="hidden-lg" ui-sref-active="active">
+            <a ui-sref="snapshots">Arquivos</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{avm.userProfile().firstName}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:void(0)" ng-click="avm.manageAccount()">Gerenciar conta</a></li>
+              <li class="divider"></li>
+              <li><a href="javascript:void(0)" ng-click="avm.logout()">Sair</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col col-lg-3 visible-lg">
+          <div class="list-group">
+            <a ui-sref="dashboard" ui-sref-active="active" class="list-group-item">Painel</a>
+            <a ui-sref="snapshots" ui-sref-active="active" class="list-group-item">Arquivos</a>
+          </div>
+        </div>
+        <div ui-view="" class="col col-lg-9">
+          <div class="content-loader well">
+            <img src="/img/loader-64.gif" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3rd party -->
+    <script src="//app.nccv.org.br/auth/js/keycloak.js"></script>
+
+    <!-- Application -->
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/file-saver/FileSaver.min.js"></script>
+
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/lib/angular-toastr/dist/angular-toastr.min.js"></script>
+    <script src="/lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="/lib/ng-table/dist/ng-table.min.js"></script>
+    <script src="/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="/lib/angular-chart.js/dist/angular-chart.min.js"></script>
+
+    <script src="/app/modules.js"></script>
+    <script src="/app/bootstrap.js"></script>
+    <script src="/app/constants.js"></script>
+    <script src="/app/route.js"></script>
+
+    <script src="/app/common/btn-action.js"></script>
+    <script src="/app/configuration/keycloack.js"></script>
+    <script src="/app/dashboard/controller.js"></script>
+    <script src="/app/dashboard/service.js"></script>
+    <script src="/app/global/app.controller.js"></script>
+    <script src="/app/interceptor/http-error.js"></script>
+    <script src="/app/snapshot/list.controller.js"></script>
+    <script src="/app/snapshot/service.js"></script>
+  </body>
+</html>

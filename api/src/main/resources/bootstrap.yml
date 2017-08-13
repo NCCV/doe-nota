@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: br.org.nccv.nccv-api

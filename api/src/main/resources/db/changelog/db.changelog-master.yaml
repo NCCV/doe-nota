@@ -1,0 +1,136 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: uanderson
+      changes:
+        - createTable:
+            tableName: revision
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: version
+                  type: text
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: uanderson
+      changes:
+        - createTable:
+            tableName: snapshot
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: item_count
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 3
+      author: uanderson
+      changes:
+        - createTable:
+            tableName: invoice
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cl_key
+                  type: varchar(44)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cl_date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cl_value
+                  type: numeric(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cl_snapshot
+                  type: varchar(36)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cl_database
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 4
+      author: uanderson
+      changes:
+        - addUniqueConstraint:
+            tableName: snapshot
+            columnNames: created_at
+            constraintName: unique_snapshot_created_at
+
+  - changeSet:
+      id: 5
+      author: uanderson
+      changes:
+        - modifyDataType:
+            tableName: invoice
+            columnName: cl_key
+            newDataType: varchar(255)
+
+  - changeSet:
+      id: 6
+      author: uanderson
+      changes:
+      - addColumn:
+          tableName: invoice
+          columns:
+          - column:
+              name: cl_cnpj
+              type: varchar(18)
+              constraints:
+                nullable: false
+          - column:
+              name: cl_coo
+              type: varchar(6)
+              constraints:
+                nullable: false
+
+  - changeSet:
+      id: 7
+      author: uanderson
+      changes:
+      - addColumn:
+          tableName: snapshot
+          columns:
+          - column:
+              name: item_total
+              type: numeric(15,2)
+              constraints:
+                nullable: false

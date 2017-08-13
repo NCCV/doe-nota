@@ -1,0 +1,8 @@
+{
+  "realm": "NCCV-Realm",
+  "realm-public-key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnKutZoSH6+mxxT1Jm07bBfMSG/FwIbc9KxmuPmIugz2zWQT7MZ+pNm989GB/cF5Z64jQr0BreBcONzGlFU8Lmrgj4Y3u13rqnV5p+MzRQa3WOVyVX7YuRkpuyUL47UqFq1doxLgoFWgE53msaWs9hZpvEZrVJyPsQvG2okMY6PeoEAH5bdbkPIJAS74I0bPSzc9dGZdfIxgicoCbnxl/PoZpQISZ+GfGHv+KCvyXgi5NmfkR6IUC2fOSSBt5V09GFGxwftL6uPd/FA2A/hMcd0zldNgLF0vtXzzGiveIZ6PA7NlORT8a3jdEV/y2HCehlbluKrrJ6lRlw4D9ARlOnwIDAQAB",
+  "auth-server-url": "http://localhost:8080/auth",
+  "ssl-required": "external",
+  "resource": "nccv-ui",
+  "public-client": true
+}

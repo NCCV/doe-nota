@@ -1,0 +1,52 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Arquivos</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col col-md-12">
+        <div class="content-loader" ng-hide="vm.loaded || vm.hasData()">
+          <img src="/img/loader-32.gif" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-md-12">
+        <div class="ng-hide" ng-show="vm.loaded && vm.hasData()">
+          <button btn-action="vm.create()" type="button" class="btn btn-default pull-right">Criar snapshot</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-md-12">
+        <div class="ng-hide" ng-show="vm.loaded && vm.hasData()">
+          <hr />
+          <table class="table table-condensed" ng-table="vm.table">
+            <tr id="{{snapshot.id}}" ng-repeat="snapshot in $data track by snapshot.id">
+              <td data-title="'Gerado em'">{{snapshot.createdAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+              <td data-title="'Total'">{{snapshot.itemTotal | currency:'R$':2}}</td>
+              <td data-title="'Itens'">{{snapshot.itemCount}}</td>
+              <td class="actions">
+                <div class="ng-hide" ng-show="vm.canExport(snapshot)">
+                  <button type="button" class="btn btn-default btn-sm" btn-action="vm.doExport(snapshot)"
+                      hide-content="true" title="Exportar snapshot">
+                    <span class="fa fa-file-excel-o"></span>
+                  </button>
+                </div>
+                <a class="btn btn-default btn-sm ng-hide" ng-click="vm.download(snapshot)"
+                    ng-show="vm.canDownload(snapshot)" title="Download do snapshot">
+                  <span class="fa fa-cloud-download"></span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="ng-hide" ng-show="vm.loaded && !vm.hasData()">
+          <button btn-action="vm.create()" type="button" class="btn btn-primary btn-lg btn-block">Criar o seu primeiro snapshot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

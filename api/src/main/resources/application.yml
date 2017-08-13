@@ -1,0 +1,31 @@
+app:
+  csv:
+    directory: /Workspace/SGM/Temporary
+  couchdb:
+    url: http://localhost:5984
+    username: application
+    password: fc178695e0d0493a993d29df3fde3cd5
+spring:
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nccv34b0e3ad?createDatabaseIfNotExist=true
+    username: root
+    password: a1b2c3d4f9
+  batch:
+    job:
+      enabled: false
+keycloak:
+  realm: NCCV-Realm
+  realm-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnKutZoSH6+mxxT1Jm07bBfMSG/FwIbc9KxmuPmIugz2zWQT7MZ+pNm989GB/cF5Z64jQr0BreBcONzGlFU8Lmrgj4Y3u13rqnV5p+MzRQa3WOVyVX7YuRkpuyUL47UqFq1doxLgoFWgE53msaWs9hZpvEZrVJyPsQvG2okMY6PeoEAH5bdbkPIJAS74I0bPSzc9dGZdfIxgicoCbnxl/PoZpQISZ+GfGHv+KCvyXgi5NmfkR6IUC2fOSSBt5V09GFGxwftL6uPd/FA2A/hMcd0zldNgLF0vtXzzGiveIZ6PA7NlORT8a3jdEV/y2HCehlbluKrrJ6lRlw4D9ARlOnwIDAQAB
+  bearer-only: true
+  auth-server-url: http://localhost:8080/auth
+  ssl-required: external
+  resource: nccv-api
+  cors: true
+  credentials:
+    secret: 8facf203-1a54-483d-80bb-9653b7ad7bba
+server:
+  port: 7777
+  context-path: /api

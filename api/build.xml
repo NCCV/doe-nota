@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<project xmlns:git="antlib:com.rimerosolutions.ant.git" name="Deployer" default="run">
+
+  <!-- Conditional properties -->
+  <fail message="Profile property is required">
+    <condition>
+      <not>
+        <isset property="profile"/>
+      </not>
+    </condition>
+  </fail>
+
+  <!-- Default properties -->
+  <condition property="repository" value="${repository}" else="ssh://git@bitbucket.org/uandersonsoares/nccv-deployment.git">
+    <isset property="repository" />
+  </condition>
+
+  <!-- Application definition -->
+  <property name="artifactId" value="nccv-api"/>
+  <property name="artifactVersion" value="0.4.1.RELEASE"/>
+  <property name="artifactDir" value="${basedir}/target"/>
+
+  <!-- Directories -->
+  <property name="targetDir" value="${basedir}/x-target"/>
+  <property name="deploymentDir" value="${targetDir}/deployment"/>
+  <property name="profileDir" value="${deploymentDir}/${artifactId}/${profile}"/>
+  <property name="packageDir" value="${targetDir}/package"/>
+  <property name="antLibDir" value="${user.home}/.ant/lib"/>
+
+  <!-- Run all targets to deploy the application -->
+  <target name="run" depends="-bootstrap,-create-task,-clone,-parse,-package,-upload"/>
+
+  <!-- Download necessary libraries -->
+  <target name="-bootstrap">
+    <delete dir="${targetDir}" failonerror="false"/>
+    <mkdir dir="${antLibDir}"/>
+
+    <get dest="${antLibDir}/jsch-0.1.54.jar">
+      <url url="http://search.maven.org/remotecontent?filepath=com/jcraft/jsch/0.1.54/jsch-0.1.54.jar"/>
+    </get>
+    <get dest="${antLibDir}/org.eclipse.jgit.ant-4.5.0.201609210915-r.jar">
+      <url url="https://dl.dropboxusercontent.com/u/79574376/org.eclipse.jgit.ant-4.6.0-SNAPSHOT.jar"/>
+    </get>
+    <get dest="${antLibDir}/org.eclipse.jgit-4.5.0.201609210915-r.jar">
+      <url url="http://search.maven.org/remotecontent?filepath=org/eclipse/jgit/org.eclipse.jgit/4.5.0.201609210915-r/org.eclipse.jgit-4.5.0.201609210915-r.jar"/>
+    </get>
+    <get dest="${antLibDir}/slf4j-api-1.7.21.jar">
+      <url url="http://search.maven.org/remotecontent?filepath=org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.jar"/>
+    </get>
+  </target>
+
+  <!-- Create custom taks to be used in this project -->
+  <target name="-create-task">
+    <taskdef resource="org/eclipse/jgit/ant/ant-tasks.properties" />
+  </target>
+
+  <!-- Clone the git repository with deployment information -->
+  <target name="-clone">
+    <git-clone uri="${repository}" sshkey="true" dest="${deploymentDir}"/>
+  </target>
+
+  <!-- Parse the json configuration file -->
+  <target name="-parse">
+    <script language="javascript">
+      var files = java.nio.file.Files;
+      var paths = java.nio.file.Paths;
+      var collectors = java.util.stream.Collectors;
+
+      var jsonFile = paths.get(project.getProperty('profileDir') + '/deployment.json');
+      var jsonLines = files.lines(jsonFile);
+      var jsonContent = JSON.parse(jsonLines.collect(collectors.joining()));
+
+      for (key in jsonContent) {
+        project.setProperty(key, jsonContent[key]);
+      }
+    </script>
+  </target>
+
+  <!-- Package all the files to send to server -->
+  <target name="-package">
+    <mkdir dir="${packageDir}"/>
+    <copy file="${artifactDir}/${artifactId}-${artifactVersion}.jar" tofile="${packageDir}/application.jar"/>
+    <copy file="${profileDir}/application.conf" todir="${packageDir}"/>
+
+    <mkdir dir="${packageDir}/config"/>
+    <copy file="${profileDir}/bootstrap.yml" todir="${packageDir}/config"/>
+    <copy file="${profileDir}/application.yml" todir="${packageDir}/config" failonerror="false"/>
+
+    <zip basedir="${packageDir}" destfile="${targetDir}/${artifactId}-${artifactVersion}.zip"/>
+  </target>
+
+  <!-- Upload and execute the deploy -->
+  <target name="-upload">
+    <property name="machineKey" value="${profileDir}/key.ppk" />
+    <property name="machineUrl" value="${machineUser}@${machineHost}" />
+
+    <property name="sourceFile" value="${targetDir}/${artifactId}-${artifactVersion}.zip"/>
+    <property name="targetFile" value="${machineUrl}:/home/ec2-user/${artifactId}-${artifactVersion}.zip"/>
+    <property name="sourceDeployFile" value="${deploymentDir}/common/deploy.sh"/>
+    <property name="targetDeployFile" value="${machineUrl}:/home/ec2-user/${artifactId}-${artifactVersion}.sh"/>
+
+    <echo>Transferring</echo>
+    <scp file="${sourceFile}" todir="${targetFile}" keyfile="${machineKey}" trust="true"/>
+    <scp file="${sourceDeployFile}" todir="${targetDeployFile}" keyfile="${machineKey}" trust="true"/>
+
+    <echo>Executing</echo>
+    <sshexec host="${machineHost}" username="${machineUser}" keyfile="${machineKey}" command="sudo chmod +x /home/ec2-user/${artifactId}-${artifactVersion}.sh" trust="true" usepty="true"/>
+    <sshexec host="${machineHost}" username="${machineUser}" keyfile="${machineKey}" command="sudo /home/ec2-user/${artifactId}-${artifactVersion}.sh ${artifactId} ${artifactVersion}" trust="true" usepty="true"/>
+  </target>
+</project>

@@ -1,0 +1,38 @@
+<ion-view class="transparent" view-title="">
+  <ion-nav-buttons side="left">
+    <a href="#/tab/scanner" class="button button-clear icon-left ion-ios-arrow-left nav-back-button">&nbsp;Voltar</a>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <img src="img/nccv-logo.png" class="nav-nccv-logo"/>
+    <img src="img/app-logo.png" class="nav-app-logo"/>
+  </ion-nav-buttons>
+  <ion-content class="invoices-content">
+    <ion-refresher on-refresh="vm.load()"></ion-refresher>
+    <ion-list class="invoices">
+      <ion-item class="item" collection-repeat="invoice in vm.invoices"
+          collection-item-height="80" collection-item-width="'100%'">
+        <div class="item-wrapper">
+          <div class="row">
+            <div class="col">
+              <span class="currency-symbol">R$</span>
+              <span class="value">{{invoice.value | currency:'':2}}</span>
+            </div>
+            <div class="col date-col">
+              <span class="date">{{invoice.date | date:'dd/MM/yyyy'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col labels">
+              <span class="label-scanned status-{{invoice.status}}">
+                <span class="ion-checkmark"></span> Escaneada
+              </span>
+              <span class="label-sent status-{{invoice.status}}">
+                <span class="ion-checkmark"></span> Enviada
+              </span>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <!-- build:css dist_css/style.min.css -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="css/nccv.app.css" rel="stylesheet">
+    <!-- endbuild -->
+
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="lib/pouchdb/dist/pouchdb.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/moment/locale/pt-br.js"></script>
+    <script src="lib/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="lib/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="lib/angular-momentjs/angular-momentjs.min.js"></script>
+    <script src="lib/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- build:js dist_js/templates.min.js -->
+    <script src="js/templates.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js dist_js/app.min.js -->
+    <script src="js/bootstrap.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/platform.js"></script>
+    <script src="js/routes.js"></script>
+
+    <script src="js/pouch/design.js"></script>
+    <script src="js/pouch/pouch.js"></script>
+
+    <script src="js/scandit/scandit.js"></script>
+
+    <script src="js/invoice/controller.js"></script>
+    <script src="js/invoice/service.js"></script>
+
+    <script src="js/ocr/ocr.js"></script>
+
+    <script src="js/scanner/code.service.js"></script>
+    <script src="js/scanner/ocr.service.js"></script>
+    <script src="js/scanner/scanner.controller.js"></script>
+
+    <script src="js/support/permission.js"></script>
+    <script src="js/support/uuid.js"></script>
+    <script src="js/support/validation.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-app="nccv">
+    <!-- The nav bar that will be updated as we navigate between views. -->
+    <ion-nav-bar class="bar-light"></ion-nav-bar>
+
+    <!-- The views will be rendered here. -->
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

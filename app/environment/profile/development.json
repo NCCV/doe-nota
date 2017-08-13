@@ -1,0 +1,8 @@
+{
+  "couchUrl": "http://192.168.0.100:5984",
+  "token": "bd771a2b629443209f0760ca3753e973",
+  "scanditApiKey": "RZ8C8lwMTP2EV2+eKlR71fTK0ZChnKdO+MkozkfQnKo",
+  "scanditCodeDuplicateFilter": 5000,
+  "ocrUrl": "https://api.ocr.space/parse/image",
+  "ocrKey": "36299de6aa88957"
+}

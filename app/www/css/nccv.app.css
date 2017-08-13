@@ -1,0 +1,261 @@
+/** Base elements
+ ---------------------------------------------------------*/
+html {
+  background: url('../img/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+/** App view
+ ---------------------------------------------------------*/
+ion-view.transparent {
+  background-color: transparent
+}
+
+.nav-back-button {
+  color: #ffffff !important;
+  font-style: italic;
+}
+
+.nav-app-logo,
+.nav-nccv-logo {
+  height: 30px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+/** Tabs
+ ---------------------------------------------------------*/
+ion-tabs {
+  background-color: transparent !important;
+}
+
+.tab-nav.tabs {
+  border: none !important;
+  background: none !important;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.75);
+}
+
+.tab-item {
+  color: #ffffff !important;
+}
+
+.tab-item.tab-item-active {
+  border: none !important;
+  background-color: #ffad2d;
+}
+
+/** Scanner content
+ ---------------------------------------------------------*/
+ion-content.tab-scanner .app-logo,
+ion-content.tab-scanner .nccv-logo,
+ion-content.tab-scanner .scan-button,
+ion-content.tab-scanner .see-invoices {
+  display: block;
+}
+
+ion-content.tab-scanner .app-logo {
+  width: 50%;
+  margin: 10px auto 2em;
+  cursor: pointer;
+}
+
+ion-content.tab-scanner .nccv-logo {
+  position: absolute;
+  width: 30%;
+  margin-left: -15%;
+  bottom: 30px;
+  left: 50%;
+}
+
+ion-content.tab-scanner .scan-button {
+  width: 72%;
+  margin: auto;
+  cursor: pointer;
+}
+
+ion-content.tab-scanner .see-invoices {
+  color: #3e9299;
+}
+
+/** Scanner component
+ ---------------------------------------------------------*/
+.scanner-container {
+  display: none;
+  position: absolute;
+  text-align: center;
+  z-index: 1000;
+  height: 100%;
+}
+
+.scanner-container.visible {
+  height: 100%;
+  display: block;
+}
+
+.scanner-bar-top.absolute,
+.scanner-bar-bottom.absolute {
+  position: absolute;
+  z-index: 1001;
+}
+
+.scanner-bar-top span,
+.scanner-bar-top a {
+  color: #ffad2d;
+  font-weight: bold;
+}
+
+.scanner-bar-top a {
+  float: right;
+}
+
+.scanner-bar-top span {
+  display: block;
+  line-height: 1.2;
+  padding: 54px 30px 30px;
+}
+
+.scanner-bar-bottom {
+  bottom: 0;
+}
+
+.scanner-bar-bottom .col.counter span,
+.scanner-bar-bottom .col.picture a,
+.scanner-bar-bottom .col.type a {
+  color: #ffffff;
+}
+
+.scanner-bar-bottom .col.counter span {
+  font-size: 1.5em;
+}
+
+.scanner-bar-bottom .col.picture a {
+  font-size: 7em;
+}
+
+.scanner-bar-bottom .col.type a {
+  font-size: 2em;
+}
+
+.scanner-container .scanner-snapper,
+.scanner-container .scanner-canvas {
+  position: absolute;
+  margin-left: -10000px;
+}
+
+.scanner-mask-top,
+.scanner-mask-center,
+.scanner-mask-bottom {
+  position: absolute;
+}
+
+.scanner-mask-top {
+  top: 0;
+}
+
+.scanner-mask-bottom {
+  bottom: 0;
+}
+
+/** Invoice page
+ ---------------------------------------------------------*/
+.invoices-content,
+.settings-content {
+  background-color: #eaeaea !important;
+}
+
+.invoices .item {
+  border: none;
+  padding: 0 10px 10px;
+}
+
+.invoices .item-wrapper {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.invoices .item .value,
+.invoices .item .date,
+.invoices .item .currency-symbol {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.invoices .item .currency-symbol {
+  color: #cccccc;
+}
+
+.invoices .item .value,
+.invoices .item .date {
+  color: #333333;
+}
+
+.invoices .item .date-col {
+  text-align: center;
+}
+
+.invoices .labels .label-scanned,
+.invoices .labels .label-sent {
+  display: inline-table;
+  width: 90px;
+  font-size: 0.7em;
+  color: white;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.invoices .labels .label-scanned {
+  background-color: #ffad2d;
+}
+
+.invoices .labels .label-sent {
+  background-color: #125f64;
+}
+
+.invoices .labels .label-sent.status-scanned {
+  background-color: #cccccc;
+}
+
+/** General stuff
+ ---------------------------------------------------------*/
+.custom-bar-header {
+  background-color: #125f63;
+}
+
+.custom-bar-header h1 {
+  color: #ffffff;
+}
+
+/** COO form style
+ ---------------------------------------------------------*/
+.coo-form button,
+.coo-form button:active,
+.coo-form button:focus {
+  color: #ffffff !important;
+}
+
+.coo-form button {
+  background-color: #125f64;
+}
+
+.coo-form button:active {
+  background-color: #3e9299;
+}
+
+.coo-form input {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+/** Angular defaults
+ ---------------------------------------------------------*/
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
